@@ -1,0 +1,15 @@
+---
+title: "Homework14"
+format: html
+editor: visual
+---
+
+## Set up
+```{r}
+#Clear the environment
+rm(list = ls())
+
+#Load packages
+library(tidyverse)
+library(here)
+```

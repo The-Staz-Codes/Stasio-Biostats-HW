@@ -1,0 +1,35 @@
+Date,Location,Time_start,Time_end,Condition_one,Condition_two,Temperature_F,Trapper_one,Trapper_two,Trapper_three,Trapper_four,Trapper_five,Trap_zone,Species ,Total_wt_g,Bag_wt_g,Sq_wt_g,Sex,Age,Age_certainty,PIT_tag_number,PIT_tag_certainty,Ear_tag_position,Ear_tag_number,Location_fur_dye_one,Location_fur_dye_two,Freeze_brand_one,Freeze_brand_two,Comment_one,Comment_two 
+6-Sep-10,Slu Campus,14:23,15:30,Cloudy,Cool,,Whole Class,,,,,E,SCCA,860,,,M,Adult,,,,R,1,Right hip,,Right hip,,Slightly scrotal,
+6-Sep-10,Slu Campus,14:23,15:30,Cloudy,Cool,,Whole Class,,,,,F,SCCA,,,,M,Adult,,,,,,Right hip,,Right backleg,,Slightly scrotal,Missing tip of tail
+6-Sep-10,Slu Campus,14:23,15:30,Cloudy,Cool,,Whole Class,,,,,B,SCCA,800,,,M,Adult,,,,R,2,Center rump,,Left leg,,Slightly scrotal,
+6-Sep-10,Slu Campus,14:23,15:30,Cloudy,Cool,,Whole Class,,,,,B,SCCA,700,,,M,Adult,,,,R,3,Left leg,,Left middle,,Slightly scrotal,
+6-Sep-10,Slu Campus,14:23,15:30,Cloudy,Cool,,Whole Class,,,,,B,SCCA,780,,,M,Adult,,,,R,4,Left middle,,Right middle,,Slightly scrotal,
+8-Sep-10,,7:30,9:10,Partly Cloudy,Cool,65,Erin,Hannah,Leah,Abbie,,C,SCCA,950,,,F,Adult,,,,L,5,Back middle,,Left hip,,Nipples well developed and larger,
+8-Sep-10,,7:30,9:10,Partly Cloudy,Cool,65,Erin,Hannah,Leah,Abbie,,C,SCCA,750,,,F,Adult,,,,L,7,Left Hip,,Center rump,,Nipples not developed,
+8-Sep-10,,7:30,9:10,Partly Cloudy,Cool,65,Erin,Hannah,Leah,Abbie,,C,SCCA,730,,,M,Adult,,,,R,8,Left Hip,,Left hip,,Tiny scrotal,
+8-Sep-10,,7:30,9:10,Partly Cloudy,Cool,65,Erin,Hannah,Leah,Abbie,,C,SCCA,710,,,M,Sub Adult,,,,,,Right Middle,,Right shoulder,,Sub adult,
+8-Sep-10,,7:30,9:10,Partly Cloudy,Cool,65,Erin,Hannah,Leah,Abbie,,C,SCCA,780,,,F,,,,,,,,,Right hip,,Escape during freeze branding,
+8-Sep-10,,7:30,9:10,Partly Cloudy,Cool,65,Erin,Hannah,Leah,Abbie,,C,SCCA,790,,,F,Adult,,,,L,9,Right Hip,,Right leg,,Nipples large,Twitched then moved up
+10-Sep-10,Front of Johnson Hall of Science,1:30,15:10,Cloudy ,,70,Andrew,Janet,Eddie,,,C,SCCA,800,,,F,Adult,,,,L,,Left Middle,Center rump,Right hip,,Well developed nipples,
+10-Sep-10,Front of Johnson Hall of Science,1:30,15:10,Cloudy ,,70,Andrew,Janet,Eddie,,,C,SCCA,790,,,M,Adult,,,,R,,Right Hip,,Right leg,,Caught earlier,Half tail
+10-Sep-10,Front of Johnson Hall of Science,1:30,15:10,Cloudy ,,70,Andrew,Janet,Eddie,,,C,SCCA,870,,,F,Adult,,,,,,Right Leg,,Center shoudler,,Well developed nipples,
+10-Sep-10,Front of Johnson Hall of Science,1:30,15:10,Cloudy ,,70,Andrew,Janet,Eddie,,,C,SCCA,,,,F,Adult,,,,L,,Right Leg,,Right hip,,Released,
+10-Sep-10,Front of Johnson Hall of Science,1:30,15:10,Cloudy ,,70,Andrew,Janet,Eddie,,,C,SCCA,710,,,M,Adult,,,,R,,Left hip,Center rump,Center middle,Right hip,Semi scrotal,
+10-Sep-10,Front of Johnson Hall of Science,1:30,15:10,Cloudy ,,70,Andrew,Janet,Eddie,,,C,SCCA,750,,,F,Adult,,,,L,,Center Shoulder,,Center rump,Center middle,Nipples small,
+1-Oct-10,Campus,1:30,16:00,Cloudy,,60,Mathias,Lizzy,Amanda,ELB,,A9,SCCA,,,,,,,,,R,,,,,,Recaptured,Released
+1-Oct-10,Campus,1:30,16:00,Cloudy,,60,Mathias,Lizzy,Amanda,ELB,,A10,SCCA,760,,,F,,,,,L,,Left leg,Right leg,Left leg,,Closer to the left hip,
+1-Oct-10,Campus,1:30,16:00,Cloudy,,60,Mathias,Lizzy,Amanda,ELB,,A11,SCCA,850,,,M,,,,,R,,Center middle,,Center rump,Right leg,Scrotal tube slip,
+1-Oct-10,Campus,1:30,16:00,Cloudy,,60,Mathias,Lizzy,Amanda,ELB,,C6,SCCA,800,,,M,,,,,,,,,Right middle,,Escaped,Slightly scrotal
+1-Oct-10,Campus,1:30,16:00,Cloudy,,60,Mathias,Lizzy,Amanda,ELB,,F3,SCCA,750,,,F,,,,,L,,Right hip,Right shoulder,Right leg,Right hip,Small nipples,
+1-Oct-10,Campus,1:30,16:00,Cloudy,,60,Mathias,Lizzy,Amanda,ELB,,A11,SCCA,870,,,M,,,,,R,,Left Leg ,Left shoulder,Left leg,Left hip,Very scrotal,
+1-Oct-10,Campus,1:30,16:00,Cloudy,,60,Mathias,Lizzy,Amanda,ELB,,F5,SCCA,840,,,F,,,,,R,,Left middle,Right middle,Left hip,Center right,Small nipples,
+1-Oct-10,Campus,1:30,16:00,Cloudy,,60,Mathias,Lizzy,Amanda,ELB,,C6,SCCA,790,,,M,,,,,R,,Right leg,Right hip,Center rump,Center middle,Very scrotal,
+8-Oct-10,Campus,1:40,,Partly Cloudy,Breezy,65,Jacke,ELB,Eddie,Jessica,,C,SCCA,760,,,F,,,L14,N,L,16,,,,,Recapture,
+8-Oct-10,Campus,1:40,,Partly Cloudy,Breezy,65,Jacke,ELB,Eddie,Jessica,,C,SCCA,760,,,F,,,8B,Y,L,,Left knee,,Left leg,,Recapture,
+8-Oct-10,Campus,1:40,,Partly Cloudy,Breezy,65,Jacke,ELB,Eddie,Jessica,,E,SCCA,820,,,M,,,,,R,20,Right middle,,Left hip,Right hip,Bloodied nose a little,
+8-Oct-10,Campus,1:40,,Partly Cloudy,Breezy,65,Jacke,ELB,Eddie,Jessica,,C,SCCA,740,160,,F,,,,,,,Center ,Left hip,Right middle,Right leg,Escaped,
+8-Oct-10,Campus,1:40,,Partly Cloudy,Breezy,65,Jacke,ELB,Eddie,Jessica,,E,SCCA,760,,,F,,,8B,Y,,,,,,,,
+1-Sep-11,Around Johnson Hall of Science,9:00,11:30,Clear,,75,Leah,Kate,Eddie,Andrew,ELB,,SCCA,850,160,690,M,Older than one year,Y,,,R,51,New tag,,Left leg,,Recap from `10,Probab R002
+1-Sep-11,Around Johnson Hall of Science,9:00,11:30,Clear,,75,Leah,Kate,Eddie,Andrew,ELB,Java Field,SCCA,800,160,640,F,Sub Adult,N,,,,,Center rump,Center shoulder,Right leg,Right hip,Escape from tug,
+1-Sep-11,Around Johnson Hall of Science,9:00,11:30,Clear,,75,Leah,Kate,Eddie,Andrew,ELB,,SCCA,720,160,760,F,Adult,Y,,,L,7,Left hip,,Center rump,,Nipples pronounced,Recap from `10
+2-Sep-11,Around Johnson Hall of Science,15:00,,Clear,Humid,80,ELB,Mana,Kate,Erin,,,,,,,,,,,,,,,,,,,

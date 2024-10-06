@@ -4,10 +4,10 @@ format: html
 editor: visual
 ---
 
-The purpose of this file is to provide a space to work through the material and
-examples in chapter 3 of GSWR
+The purpose of this file is to provide a space to work through the material and examples in chapter 3 of GSWR
 
 Set up
+
 ```{r}
 #Clear the environment
 rm(list = ls())
@@ -19,11 +19,13 @@ library(dplyr)
 ```
 
 Read in the dataset we will be working with
+
 ```{r}
 compensation <- read.csv(here("data","compensation.csv"))
 ```
 
 Examine the data and obtain summary statistics
+
 ```{r}
 #Basic overview of the data frame
 glimpse(compensation)
@@ -32,6 +34,7 @@ summary(compensation)
 ```
 
 Access columns in the data frame using the select() function
+
 ```{r}
 #Access the "Fruit" column
 select(compensation, Fruit)
@@ -40,6 +43,7 @@ select(compensation, -Root)
 ```
 
 Access rows in the data frame using the slice() function
+
 ```{r}
 #Access the second row in the data frame
 slice(compensation, 2)
@@ -50,6 +54,7 @@ slice(compensation, c(2,3,10))
 ```
 
 Use the filter and with functions
+
 ```{r}
 #Use with function to return boolean values
 with(compensation, Fruit > 80)
@@ -61,11 +66,13 @@ filter(compensation, Fruit > 80 | Fruit < 20)
 ```
 
 Assign the values returned by a subset to an object for future use
+
 ```{r}
 lo_hi_fruit <- filter(compensation, Fruit > 80, Fruit < 20)
 ```
 
 Log transform the values stored in the Fruit column
+
 ```{r}
 #Look at the first few rows before transformation
 head(compensation)
@@ -76,18 +83,20 @@ head(compensation)
 ```
 
 Sort the data by from lowest to highest (increasing order) values in the Fruit column
+
 ```{r}
 arrange(compensation, Fruit)
 ```
 
 Combine dplyr functions
+
 ```{r}
 #Access Root values for which the associated Fruit values are greater than 80 kgs
 select(filter(compensation, Fruit > 80), Root)
 ```
 
-Access Root values for which the associated Fruit values are greater than 80 kgs
-using the pipe command
+Access Root values for which the associated Fruit values are greater than 80 kgs using the pipe command
+
 ```{r}
 compensation %>%
   filter(Fruit > 80) %>%
@@ -95,6 +104,7 @@ compensation %>%
 ```
 
 Obtain the mean values for Fruit based on Grazing (Grazed or Ungrazed)
+
 ```{r}
 mean.fruit <- summarize(
   group_by(compensation, Grazing), 
@@ -103,6 +113,7 @@ mean.fruit <- summarize(
 ```
 
 Obtain the mean values and standard deviations for Fruit based on Grazing (Grazed or Ungrazed) using the pipe command
+
 ```{r}
 compensation %>%
   group_by(Grazing) %>%
@@ -111,3 +122,5 @@ compensation %>%
     sdFruit = sd(Fruit)
   )
 ```
+
+This looks great Jason - seems like you are humming along!

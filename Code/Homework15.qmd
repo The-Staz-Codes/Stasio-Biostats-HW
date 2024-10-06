@@ -4,7 +4,9 @@ format: html
 editor: visual
 ---
 
-The purpose of this file is to provide a space to work through the material and examples in chapter 3 of GSWR
+
+The purpose of this file is to provide a space to work through the material and
+examples in chapter 3 of GSWR
 
 Set up
 
@@ -95,7 +97,9 @@ Combine dplyr functions
 select(filter(compensation, Fruit > 80), Root)
 ```
 
-Access Root values for which the associated Fruit values are greater than 80 kgs using the pipe command
+
+Access Root values for which the associated Fruit values are greater than 80 kgs
+using the pipe command
 
 ```{r}
 compensation %>%
@@ -121,6 +125,6 @@ compensation %>%
     meanFruit = mean(Fruit),
     sdFruit = sd(Fruit)
   )
-```
 
 This looks great Jason - seems like you are humming along!
+

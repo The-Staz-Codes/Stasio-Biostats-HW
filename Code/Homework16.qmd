@@ -1,0 +1,105 @@
+---
+title: "Homework16"
+format: html
+editor: visual
+---
+
+The purpose of this file is to gain more practice applying the data analysis 
+techniques detailed in GSWR Chapter 3 and functions inside the dplyr package 
+
+
+Set up
+```{r}
+#Clear the environment
+rm(list = ls())
+#Load in packages
+library(tidyverse)
+library(here)
+```
+
+Import and examine "Donnerville Percent Cover" practice data set 
+```{r}
+#Import the data set
+cover <- read.csv(here("data", "donnerville_percent_cover.csv"))
+#Examine the data
+glimpse(cover)
+str(cover)
+```
+
+Rename some of the column headings
+```{r}
+cover <- cover %>%
+  rename("Type_plot" = "Plot.type",
+         "Dim_plot" = "Plot.dim",
+         "Type_cover" = "cover_type")
+```
+
+Convert Site, Type_plot, and Type_cover into factor variables 
+```{r}
+cover$Site <- as.factor(cover$Site)
+cover$Type_plot <- as.factor(cover$Type_plot)
+cover$Type_cover <- as.factor(cover$Type_cover)
+```
+
+Convert Date to a date variable
+```{r}
+cover$Date <- dmy(cover$Date)
+```
+
+
+Error check the data set and make corrections accordingly 
+```{r} 
+#Identify rows in Site that need repair for Donnerville 1
+fix_S1 <- which(cover$Site %in% c("donnerville 1", "DONNERVILLE - 1"))
+#Apply repair 
+cover$Site[fix_S1] <- "Donnerville 1"
+
+#Identify rows in Site that need repair for Donnerville 2
+fix_S2 <- which(cover$Site == "donnerville 2")
+#Apply repair 
+cover$Site[fix_S2] <- "Donnerville 2"
+
+#Identify rows in Site that need repair for Donnerville 3
+fix_S3 <- which(cover$Site == "donnerville-3")
+#Apply repair
+cover$Site[fix_S3] <- "Donnerville 3"
+
+#Identify rows in Type_cover that need repair for Bare
+fix_TC1 <- which(cover$Type_cover == "bare")
+#Apply repair
+cover$Type_cover[fix_TC1] <- "Bare"
+
+#Identify rows in Type_cover that need repair for Bryophytes
+fix_TC2 <- which(cover$Type_cover == "bryophtes")
+#Apply repair
+cover$Type_cover[fix_TC2] <- "Bryophytes"
+
+#Identify rows in Type_cover that need repair for Vascular
+fix_TC3 <- which(cover$Type_cover == "vasc ")
+#Apply repair
+cover$Type_cover[fix_TC3] <- "Vascular"
+
+#Check levels to ensure changes were effective
+cover$Site <- factor(cover$Site)
+levels(cover$Site)
+
+cover$Type_cover <- factor(cover$Type_cover)
+levels(cover$Type_cover)
+```
+
+Determine average percent cover by cover type for Donnerville 1
+```{r}
+filter(cover, Site == "Donnerville 1") %>%
+  group_by(Type_cover) %>% 
+    summarize(
+      Mean_Percent = mean(Percent)
+    )
+```
+
+Determine the average percent cover for vascular Type_cover
+```{r}
+filter(cover, Type_cover == "Vascular") %>%
+  summarize(
+    Mean_Percent = mean(Percent)
+  )
+```

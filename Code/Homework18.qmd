@@ -4,8 +4,7 @@ format: html
 editor: visual
 ---
 
-The purpose of this file is to gain more practice applying the data analysis 
-techniques detailed in GSWR Chapter 4 and functions inside the dplyr package
+The purpose of this file is to gain more practice applying the data analysis techniques detailed in GSWR Chapter 4 and functions inside the dplyr package
 
 ```{r}
 #Clear the environment 
@@ -15,23 +14,27 @@ library(tidyverse)
 library(here)
 ```
 
-Read in the compensation data set 
+Read in the compensation data set
+
 ```{r}
 compensation <- read.csv(here("Data","compensation.csv"))
 ```
 
 Take a quick look at the data set
+
 ```{r}
 glimpse(compensation)
 ```
 
-Make a simple scatterplot of the data 
+Make a simple scatterplot of the data
+
 ```{r}
 ggplot(compensation, aes(x=Root, y=Fruit)) +
   geom_point()
 ```
 
 Change the "theme" of the scatterplot to override the default grey backround
+
 ```{r}
 ggplot(compensation, aes(x=Root, y=Fruit)) +
   geom_point() +
@@ -39,6 +42,7 @@ ggplot(compensation, aes(x=Root, y=Fruit)) +
 ```
 
 Customize the size of the scatterplot points
+
 ```{r}
 ggplot(compensation, aes(x=Root, y=Fruit)) +
   geom_point(size=5) +
@@ -46,6 +50,7 @@ ggplot(compensation, aes(x=Root, y=Fruit)) +
 ```
 
 Label the x and y-axes of the scatterplot
+
 ```{r}
 ggplot(compensation, aes(x=Root, y=Fruit)) +
   geom_point(size=5) +
@@ -55,6 +60,7 @@ ggplot(compensation, aes(x=Root, y=Fruit)) +
 ```
 
 Change the color of the points to correspond to the Grazing level
+
 ```{r}
 ggplot(compensation, aes(x=Root, y=Fruit, color=Grazing)) +
   geom_point(size=5) +
@@ -64,6 +70,7 @@ ggplot(compensation, aes(x=Root, y=Fruit, color=Grazing)) +
 ```
 
 Change the shape of the point to correspond to the Grazing level
+
 ```{r}
 ggplot(compensation, aes(x=Root, y=Fruit, shape=Grazing)) +
   geom_point(size=5) +
@@ -73,6 +80,7 @@ ggplot(compensation, aes(x=Root, y=Fruit, shape=Grazing)) +
 ```
 
 Make a box-and-whisker plot of the data
+
 ```{r}
 ggplot(compensation, aes(x=Grazing, y=Fruit)) +
   geom_boxplot() +
@@ -82,6 +90,7 @@ ggplot(compensation, aes(x=Grazing, y=Fruit)) +
 ```
 
 Layer the raw data on top of the box-and-whisker plot with a few customizations
+
 ```{r}
 ggplot(compensation, aes(x=Grazing, y=Fruit)) +
   geom_boxplot() + 
@@ -91,29 +100,31 @@ ggplot(compensation, aes(x=Grazing, y=Fruit)) +
   theme_bw()
 ```
 
-Answer the following questions:
-1. Do plants with wider root diameters at the start of the experiment produce more fruit? -> Yes
-2. Do grazed or ungrazed plants produce more fruit -> Grazed
+Answer the following questions: 1. Do plants with wider root diameters at the start of the experiment produce more fruit? -\> Yes 2. Do grazed or ungrazed plants produce more fruit -\> Grazed
 
 Make a histogram of the data
+
 ```{r}
 ggplot(compensation, aes(x=Fruit)) +
   geom_histogram()
 ```
 
 Correct the histogram by adjusting the number of bins
+
 ```{r}
 ggplot(compensation, aes(x=Fruit)) +
   geom_histogram(bins = 10)
 ```
 
-Correct the histogram by adjusting the width of the bins 
+Correct the histogram by adjusting the width of the bins
+
 ```{r}
 ggplot(compensation, aes(x=Fruit)) + 
   geom_histogram(binwidth = 15)
 ```
 
 Facet the histogram by the grazing level
+
 ```{r}
 ggplot(compensation, aes(x=Fruit)) +
   geom_histogram(binwidth=15) + 
@@ -121,6 +132,7 @@ ggplot(compensation, aes(x=Fruit)) +
 ```
 
 Save the figure in the plots window to the working directory
+
 ```{r}
 ggsave("ThatCoolHistogramAboutFruit.png")
 ```

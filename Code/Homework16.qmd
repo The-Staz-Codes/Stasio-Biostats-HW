@@ -4,11 +4,10 @@ format: html
 editor: visual
 ---
 
-The purpose of this file is to gain more practice applying the data analysis 
-techniques detailed in GSWR Chapter 3 and functions inside the dplyr package 
-
+The purpose of this file is to gain more practice applying the data analysis techniques detailed in GSWR Chapter 3 and functions inside the dplyr package
 
 Set up
+
 ```{r}
 #Clear the environment
 rm(list = ls())
@@ -17,7 +16,8 @@ library(tidyverse)
 library(here)
 ```
 
-Import and examine "Donnerville Percent Cover" practice data set 
+Import and examine "Donnerville Percent Cover" practice data set
+
 ```{r}
 #Import the data set
 cover <- read.csv(here("data", "donnerville_percent_cover.csv"))
@@ -27,6 +27,7 @@ str(cover)
 ```
 
 Rename some of the column headings
+
 ```{r}
 cover <- cover %>%
   rename("Type_plot" = "Plot.type",
@@ -34,7 +35,8 @@ cover <- cover %>%
          "Type_cover" = "cover_type")
 ```
 
-Convert Site, Type_plot, and Type_cover into factor variables 
+Convert Site, Type_plot, and Type_cover into factor variables
+
 ```{r}
 cover$Site <- as.factor(cover$Site)
 cover$Type_plot <- as.factor(cover$Type_plot)
@@ -42,13 +44,14 @@ cover$Type_cover <- as.factor(cover$Type_cover)
 ```
 
 Convert Date to a date variable
+
 ```{r}
 cover$Date <- dmy(cover$Date)
 ```
 
+Error check the data set and make corrections accordingly
 
-Error check the data set and make corrections accordingly 
-```{r} 
+```{r}
 #Identify rows in Site that need repair for Donnerville 1
 fix_S1 <- which(cover$Site %in% c("donnerville 1", "DONNERVILLE - 1"))
 #Apply repair 
@@ -88,6 +91,7 @@ levels(cover$Type_cover)
 ```
 
 Determine average percent cover by cover type for Donnerville 1
+
 ```{r}
 filter(cover, Site == "Donnerville 1") %>%
   group_by(Type_cover) %>% 
@@ -97,6 +101,7 @@ filter(cover, Site == "Donnerville 1") %>%
 ```
 
 Determine the average percent cover for vascular Type_cover
+
 ```{r}
 filter(cover, Type_cover == "Vascular") %>%
   summarize(

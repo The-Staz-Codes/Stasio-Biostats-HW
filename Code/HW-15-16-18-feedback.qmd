@@ -1,0 +1,23 @@
+---
+title: "Homework 15, 16, 18 feedback"
+format: html
+editor: visual
+---
+
+## Homework feedback
+
+### Homework 15
+
+Note that you don't need `library(ggplot2)` or `library(dplyr)` if you run `library(tidyverse)` as both are included in tidyverse.
+
+Good job combining comments about what you are doing and why outside of code chunks and how you are doing it inside of code chunks.
+
+### Homework 16
+
+Looks good. On lines 56, 61, 66 etc. you write the code to use the `which()` function to find rows with errors, but I don't see the code that tells you what the levels for these factors are until the end of the code chunk. Did you run `levels()` in the console in order to find out? If so, it would be good to have that code in your .qmd file.
+
+Otherwise looks good.
+
+### Homework 18
+
+Looks good - you might want to do more commenting of the actual code so that you know what e.g. `facet_wrap()` does in a plot.

@@ -1,0 +1,59 @@
+---
+title: "Homework-21"
+format: html
+editor: visual
+---
+
+```{r}
+#Set up the environment
+rm(list = ls())
+#Load in necessary libraries
+library(tidyverse)
+library(here)
+```
+
+Load in the data sets
+```{r}
+lady <- read.csv(here("Data", "ladybirds.csv"))
+ozone <- read.csv(here("Data", "ozone.csv"))
+```
+
+Construct graphs to examine the lady dataset
+```{r}
+#Gather the totals
+totals <- lady |>
+  group_by(Habitat, colour) |>
+    summarize(total.number = sum(number))
+#Construct the figure
+ggplot(totals, aes(x = Habitat, y = total.number, fill = colour)) +
+  geom_bar(stat = 'identity', position = 'dodge')
+#Use built-in scale function to create modified version
+ggplot(totals, aes(x = Habitat, y = total.number, fill = colour)) +
+  geom_bar(stat = 'identity', position = 'dodge') +
+  scale_fill_manual(values = c(black = "black", red = "red"))
+```
+
+Use chi-squared approach to test if the frequencies of the colors of ladybirds differ between the two habitat types
+```{r}
+#Transform the data frame into a matrix
+lady.mat <- xtabs(number ~ Habitat + colour, data = lady)
+#Run the chi-squared test
+chisq.test(lady.mat)
+#Access the specfics of the chi-squared test
+lady.chi <- chisq.test(lady.mat)
+names(lady.chi)
+```
+
+Determine ozone levels in gardens distibuted around the city using t-test
+```{r}
+#Construct histograms to get an idea of the data visually
+ggplot(ozone, aes(x = Ozone)) +
+ geom_histogram(binwidth = 10) +
+ facet_wrap(~ Garden.location, ncol = 1) +
+ theme_bw()
+#Perform the t-test
+t.test(Ozone ~ Garden.location, data = ozone)
+#We can also determine variance in a similar manner
+var.test(Ozone ~ Garden.location, data = ozone)
+```
+

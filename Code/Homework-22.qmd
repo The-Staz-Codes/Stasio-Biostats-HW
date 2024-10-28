@@ -1,0 +1,85 @@
+---
+title: "Homework 22 - Chi-square test review"
+format: html
+editor: visual
+---
+
+Today's homework asks you to think a little more deeply about how to conduct a chi-square test of association (also called a contingency analysis or contingency table).
+
+I am providing real data from a paper that examined the effectiveness of covid vaccination status ("Fully vaccinated" and "Not vaccinated") on the frequency (i.e. count) survival vs. death ("Lived" vs. "Died") from covid in patients coming to the emergency room of a Turkish hospital.
+
+Start by setting things up
+
+```{r}
+#Clear the environment
+rm(list =ls())
+#Load in packages
+library(tidyverse)
+library(here)
+```
+
+Now read in the data file called `covid_vaccines.csv`. Make sure that this data file is located in the data folder of your Biostats-HW project! Assign the data to an object.
+
+```{r}
+covid <- read.csv(here("Data", "covid_vaccines.csv"))
+```
+
+There are two variables in the data set that should be assigned as factor variables. Do that now.
+
+```{r}
+#Look at the data
+glimpse(covid)
+#Assign necessary variables as factor variables
+covid$Vaccination_status <- as.factor(covid$Vaccination_status)
+covid$Survival <- as.factor(covid$Survival)
+```
+
+## Examine and plot the data
+
+```{r}
+covid |> arrange(Patient_ID) |> view()
+```
+Now view the data set. What do you notice about it? Are there any obvious count data already created? Explain:
+
+Write your answer here.
+
+The data set has three columns, two of which can be considered categorical binary data: Vaccination_status (with levels Fully Vaccinated and Not Vaccinated) and
+Survival (with levels Died and Lived). Patient_ID can be considered count data (discrete on an integer scale where patients are assigned a number starting with 1 and counting up from there for each new patient, although by doing a quick sort, we see some integers such as 3 are absent).
+
+Now you need to write some code to obtain the actual counts and save them in a new object called `covid_counts`. You will use the familiar `group_by` and `summarise`. However, you need to try a new trick to get counts when your dataset has no actual numbers in it. I'm going to suggest that within your `summarise` statement you create a new variable called `count`. And I'm going to ask you to see if you can figure out how to use a function called `length` to obtain count data. You may need to use the help in RStudio or google to figure out how to do this step.
+
+```{r}
+covid_counts <- covid |>
+  group_by(Vaccination_status, Survival) |>
+    summarize(
+      count = length(Vaccination_status)
+    )
+```
+
+Now make a bar plot that shows the count data using the `covid_counts` dataframe you just created. Put survival on the x-axis and fill the bars based on vaccination status. Color vaccinated patients in dark green and unvaccinated patients in black. Remove the gray background.
+
+```{r}
+ggplot(covid_counts, aes(x = Survival, y = count, fill = Vaccination_status)) +
+  geom_bar(stat = 'identity', position = 'dodge') +
+  scale_fill_manual(values = c("Fully vaccinated" = "darkgreen", "Not vaccinated" = "black")) +
+  theme_bw()
+```
+
+## Conduct the Chi-square test
+
+Now use the information from Chapter 5 and Homework 21 to conduct a Chi-square test of association. Your "null hypothesis" is that there is no association between whether a patient has had a covid vaccine and their survival in the emergency room.
+
+```{r}
+#Create a matrix of the data
+covid.mat <- xtabs(~ Survival + Vaccination_status, data = covid)
+```
+
+```{r}
+#Perform the Chi-square test
+chisq.test(covid.mat)
+```
+
+## Interpret the results
+
+Now write a statement or two that interprets the results of your analysis.
+Since we returned a small p-value from the chi-squared test, under the associated assumptions we can reasonably reject the null hypothesis, thus concluding that there is an association between vaccination and survival outcome. The p-value indicates the probability that these results occurred by chance, which is unlikely. 

@@ -1,0 +1,79 @@
+---
+title: "Homework 24"
+format: html
+editor: visual
+---
+
+## Overview
+
+For your homework you will implement a data analysis using a dataset on crab growth measurements.
+
+Set things up (hint: there is a new package to add with `library()`)
+
+```{r}
+#Clear the environment
+rm(list = ls())
+#Load in packages
+library(tidyverse)
+library(here)
+library(ggfortify)
+```
+
+## The data
+
+Let's pull in some data appropriate biologists: crab measurements. This dataset includes measurements of farmed crabs.
+
+```{r}
+#Load in the dataset
+crabs <- read.csv(here("Data", "CrabAgePrediction.csv"))
+#Examine the dataset 
+glimpse(crabs)
+```
+
+One of the variables is categorical - let's fix that in the data.
+
+```{r}
+#Convert sex to a factor variable
+crabs$Sex <- as.factor(crabs$Sex)
+```
+
+## Question
+
+Is there a relationship between height and weight in female crabs?
+
+1.  Extract the data for just female crabs.
+```{r}
+#Extract the new data set, filtering for female crabs and also removing the single outlier that is much taller than the other female crabs (over double the size of the second tallest) for a better analysis
+female_crabs <- filter(crabs, Sex == "F", Height < 1)
+```
+
+
+2.  Examine the response and predictor variables and use the flow chart from class to decide the appropriate statistical analysis (choose from: chi-square, 2-sample t-test or linear regression). Explain your answer here:
+
+Using height as the predictor variable and weight as the response variable, both are ratio data and there is only one predictor variable, so using a linear regression would be an appropriate statistical analysis to run.  
+
+3.  Work through the data analysis **following all of the steps provided in chapter 5 of your book**. You may use class notes or homework keys as a guide.
+
+Fit linear model and assess assumptions
+```{r}
+#Fit the linear model
+female_crab_model <- lm(Weight ~ Height, data = female_crabs)
+#Generate plots using autoplot to assess assumptions
+autoplot(female_crab_model, smooth.color = NA)
+```
+
+Produce a sum-of-squares table and a table of estimates
+```{r}
+#Generate the sum-of-squares table
+anova(female_crab_model)
+#Generate the table of estimates
+summary(female_crab_model)
+```
+
+Generate a scatterplot with a regression line
+```{r}
+ggplot(female_crab_model, aes(x=Height, y=Weight)) +
+  geom_point(size=1) +
+  geom_smooth(method = 'lm') +
+  theme_bw()
+```

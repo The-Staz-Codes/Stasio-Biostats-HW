@@ -1,0 +1,62 @@
+---
+title: "Homework-23"
+format: html
+editor: visual
+---
+
+Set Up
+
+```{r}
+#Clear the environment
+rm(list = ls())
+#Load in packages
+library(tidyverse)
+library(here)
+library(ggfortify)
+```
+
+Load in and examine the dataset
+
+```{r}
+#Load in the dataset
+plant_gr <- read.csv(here("Data", "plant.growth.rate.csv"))
+#Examine the dataset
+glimpse(plant_gr)
+```
+
+Create a basic scatterplot of the data
+
+```{r}
+ggplot(plant_gr, aes(x = soil.moisture.content, y = plant.growth.rate)) +
+  geom_point() +
+  ylab("Plant Growth Rate (mm/week)") +
+  theme_bw()
+```
+
+Fit a linear model where we hypothesize that plant growth rate is a function of soil moisture content and generate some plots
+
+```{r}
+#Fit the linear model
+model_pgr <- lm(plant.growth.rate ~ soil.moisture.content, data = plant_gr)
+#Generate plots using autoplot
+autoplot(model_pgr, smooth.color = NA)
+```
+
+Produce a sum-of-squares table and a table of estimates
+
+```{r}
+#Generate the sum-of-squares table
+anova(model_pgr)
+#Generate the table of estimates
+summary(model_pgr)
+```
+
+Add a regression line to the scatterplot
+
+```{r}
+ggplot(plant_gr, aes(x = soil.moisture.content, y = plant.growth.rate)) +
+  geom_point() +
+  geom_smooth(method = 'lm') +
+  ylab("Plant Growth Rate (mm/week)") +
+  theme_bw()
+```

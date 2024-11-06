@@ -72,7 +72,7 @@ sumDat <- daphnia |>
 sumDat
 ```
 
-Construct a that models growth rate among different treatment levels and also include the means
+Construct a graph that models growth rate among different treatment levels and also include the means
 ```{r}
 ggplot(daphnia, aes(x=growth.rate, y=parasite, color=parasite)) +
   geom_point(size=3, alpha=0.5) +

@@ -1,0 +1,97 @@
+---
+title: "Homework-26"
+format: html
+editor: visual
+---
+
+The purpose of this file is to practice going through the steps of data analysis with little instruction provided (self-sufficiently)
+
+Set up
+```{r}
+#Clear the environment
+rm(list = ls())
+#Load in packages
+library(tidyverse)
+library(here)
+library(ggfortify)
+library(multcomp)
+```
+
+Load in and examine the dataset 
+```{r}
+#Load in the dataset
+peas <- read.csv(here("Data", "s_r_pea_sections.csv"))
+#Examine the dataset 
+glimpse(peas)
+```
+
+Convert the treatment column to a factor variable
+```{r}
+#Convert column
+peas$Treatment <- as.factor(peas$Treatment)
+#Check levels
+levels(peas$Treatment)
+```
+
+Construct a histogram and box-and-whisker plot to get a rough idea of the relationship we are investigating: The effect different treatment levels have on pea section lengths
+```{r}
+#Construct the histogram
+ggplot(peas, aes(x=pea_section_length_ou)) +
+  geom_histogram(bins = 5) +
+  facet_wrap(~Treatment) +
+  theme_bw()
+#Construct the box-and-whisker plot
+ggplot(peas, aes(x=Treatment, y=pea_section_length_ou)) +
+  geom_boxplot() +
+  theme_bw() +
+  coord_flip()
+```
+
+Examining the box-and-whisker-plot, we can see that, on average, the treatments besides the control (sucrose, glucose, fructose, and a glucose/fructose combo) have shorter pea section lengths. The means for the glucose, fructose, and the combo seem to lie between 57.5-60 ou, about 64 ou for sucrose, and about 71 ou for the control. The control also has noticeably more variability (larger interquartile ranges) compared to the others 
+
+Conduct an ANOVA Test
+```{r}
+#Fit the model
+model_peas <- lm(pea_section_length_ou ~ Treatment, data = peas)
+#Assess the assumptions
+autoplot(model_peas, smooth.color = NA)
+#Run the ANOVA Test
+anova(model_peas)
+```
+
+The small p-value found in this ANOVA test indicates it is unlikely our results are observed due to chance, which means we can conclude there is a significant statistical difference between pea section lengths among treatment groups 
+
+Construct a clean graph that models pea length among different treatment levels and also include the means
+```{r}
+#Calculate the means
+means <- peas |>
+  group_by(Treatment) |>
+    summarize(
+      meanLEN = mean(pea_section_length_ou)
+    )
+#Construct the plot
+ggplot(peas, aes(x=pea_section_length_ou, y=Treatment, color = Treatment)) +
+  geom_point(size=3, alpha=0.5) +
+  geom_point(data=means, aes(x=meanLEN, y=Treatment, color= Treatment), shape=18, size=7) 
+```
+
+View contrasts using summary table 
+```{r}
+#Set "Control" as the reference level so that it is chosen as the intercept the other treatments are compared to
+peas$Treatment <- relevel(peas$Treatment, ref = "Control")
+#Re-fit the model to include this update
+model_peas2 <- lm(pea_section_length_ou ~ Treatment, data = peas)
+#Construct the summary table
+summary(model_peas2)
+```
+
+The estimates represent the contrasts, which are all negative and large numbers, indicating that the pea section lengths among the treatments are, on average, much smaller in size than the control group
+
+Conduct a Tukey's HSD test
+```{r}
+#Conduct test
+phc1 <- glht(model_peas2, linfct = mcp(Treatment = "Tukey"))
+summary(phc1)
+```
+
+The Tukey's test runs through all possible comparisons among treatment groups. The estimates that compare the control group to the other treatment groups are the same as the ones generated in the summary table. Once again, the large negative numbers indicate that, on average, the treatment groups' pea section lengths are smaller comapred to the control group. These contrasts also tell us that, on average, the glucose, fructose, and the combo's pea section lengths are similar. 

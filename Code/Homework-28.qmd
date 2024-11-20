@@ -1,0 +1,128 @@
+---
+title: "Homework-28"
+format: html
+editor: visual
+---
+
+The purpose of this file is to provide a space to work through the material and examples in chapter 8 of GSWR
+
+#### Set up
+```{r}
+#Clear the environment
+rm(list=ls())
+#Load in packaged
+library(tidyverse)
+library(here)
+library(ggfortify)
+library(gridExtra)
+```
+
+#### Load in and examine the dataset
+```{r}
+# Load in the dataset
+compensation <- read.csv(here("Data","compensation.csv"))
+# Examine the dataset
+glimpse(compensation)
+```
+
+#### Construct basic plots
+
+```{r}
+# BASE scatterplot
+base_scatter <- ggplot(data = compensation, aes(x = Root, y = Fruit)) +
+  geom_point()
+ # BASE box-and-whiskers plot
+base_box <- ggplot(data = compensation, aes(x = Grazing, y = Fruit)) +
+  geom_boxplot()
+
+#Update the scatterplot to include a theme
+base_scatter + theme_bw()
+```
+
+#### Place figures onto the same page
+```{r}
+grid.arrange(base_scatter, base_box, nrow = 1)
+```
+
+#### Modify the plot labels
+```{r}
+#Add axis labels
+base_scatter + xlab("Root Biomass") + ylab("Fruit Production")
+#Add a title 
+base_scatter + ggtitle("Very necessary title")
+#The following code accomplishes the same result as the above lines
+base_scatter + labs(title = "Very necessary title",
+                        x = "Root Biomass",
+                        y = "Fruit Production")
+```
+
+#### Modify the axes' ranges
+```{r}
+base_scatter + xlim(0, 20) + ylim(0, 140)
+```
+
+#### Place text inside the figure
+```{r}
+base_scatter +
+ annotate("text", x = c(6,8), y = c(105, 25),
+ label = c("Text up here...","...and text down here"))
+```
+
+#### Use scale to edit tick placements
+```{r}
+base_scatter + scale_x_continuous(limits = c(4, 11), breaks = 4:11)
+```
+
+### Use scale to modify point colors to distinguish between groups
+```{r}
+ggplot(data = compensation, aes(x = Root, y = Fruit, colour = Grazing)) +
+ geom_point() +
+ scale_colour_manual(values = c(Grazed = "brown",
+                                Ungrazed = "green"))
+```
+
+#### Perform a log transform
+```{r}
+base_box +
+ scale_y_continuous(breaks = seq(from = 10, to = 150, by = 20),
+                    trans = "log10")
+```
+
+#### Manuanlly adjust the scatterplot theme
+```{r}
+base_scatter +
+ theme(
+ panel.background = element_rect(fill = NA, colour = "black"),
+ panel.grid.minor = element_blank(),
+ panel.grid.major = element_line(colour = "lightblue")
+ )
+```
+
+#### Adjust color and size of x-axis title and change the angle of the tick labels
+```{r}
+base_box +
+ theme(
+ axis.title.x = element_text(colour = "cornflowerblue",
+ size =rel(2)),
+ axis.text.x = element_text(angle = 45, size = 13, vjust = 0.5))
+```
+
+#### Alter level names
+```{r}
+base_box + scale_x_discrete(limits = c("Ungrazed", "Grazed"),
+ labels = c("Control", "Grazed"))
+```
+
+#### Modify the key
+```{r}
+ggplot(compensation, aes(x = Root, y = Fruit, colour = Grazing)) +
+ geom_point() +
+ theme(legend.key = element_rect(fill = NA))
+```
+
+#### Remove the key
+```{r}
+ggplot(compensation, aes(x = Root, y = Fruit, colour = Grazing)) +
+ geom_point() +
+ theme(legend.position = "none")
+```
